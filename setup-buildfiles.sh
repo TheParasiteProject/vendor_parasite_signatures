@@ -77,6 +77,7 @@ function write_product_certificate_overrides() {
 
     echo 'PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_COMMON)/data/releasekey' >> "$PRODUCTMK"
     echo 'PRODUCT_OTA_PUBLIC_KEYS := $(CERTIFICATE_COMMON)/data/releasekey.x509.pem' >> "$PRODUCTMK"
+    echo 'PRODUCT_EXTRA_RECOVERY_KEYS += $(CERTIFICATE_COMMON)/data/releasekey' >> "$PRODUCTMK"
 }
 
 function create_symlinks() {
