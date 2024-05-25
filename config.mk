@@ -1,3 +1,11 @@
+CERTIFICATE_DIRECTORY ?= vendor/parasite-signatures/common
+
+ifeq ($(TARGET_BUILD_FULLY_SIGN),true)
+TARGET_DEFAULT_DEV_SIGN := true
+TARGET_DEFAULT_CERTIFICATE_OVERRIDE := true
+endif
+
+ifeq ($(TARGET_DEFAULT_CERTIFICATE_OVERRIDE),true)
 PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.adbd:com.android.adbd.certificate.override \
     com.android.adservices:com.android.adservices.certificate.override \
@@ -51,8 +59,9 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.android.wifi.resources:com.android.wifi.resources.certificate.override \
     com.google.pixel.vibrator.hal:com.google.pixel.vibrator.hal.certificate.override \
     com.qorvo.uwb:com.qorvo.uwb.certificate.override
+endif
 
-CERTIFICATE_DIRECTORY ?= vendor/parasite-signatures/common
-
-PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_DIRECTORY)/data/testkey
+ifeq ($(TARGET_DEFAULT_DEV_SIGN),true)
+PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_DIRECTORY)/data/releasekey
 PRODUCT_EXTRA_RECOVERY_KEYS :=
+endif
