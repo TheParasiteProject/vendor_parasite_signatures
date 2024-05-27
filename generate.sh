@@ -8,11 +8,11 @@ then
     subject='/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
 fi
 
-outdir=../data
+outdir=../private-signatures
 
 MAKEKEY=./make_key
 
-for file in `cat certificate-files.txt` `cat certificate-override-files.txt`
+for file in `cat certificate-files.txt`
 do
     bash $MAKEKEY $outdir/"$file" "$subject" rsa
 done

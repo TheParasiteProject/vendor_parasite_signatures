@@ -1,18 +1,18 @@
-# vendor_parasite-signatures_common
+# vendor_parasite-signatures
 
 ```bash
-croot && git clone https://github.com/TheParasiteProject/vendor_parasite-signatures_common vendor/parasite-signatures/common
+croot && git clone https://github.com/TheParasiteProject/vendor_parasite-signatures vendor/parasite-signatures
 ```
 
 ```bash
-cd vendor/parasite-signatures/common
+cd vendor/parasite-signatures
 ```
 
 ```bash
 ./generate.sh
 ```
 
-* Keys will generated under `../data`
+* Keys will generated under `../private-signatures`
 
 ## References
 

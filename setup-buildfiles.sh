@@ -2,11 +2,19 @@
 
 CWD=$(pwd)
 
-ANDROIDBP="Android.bp"
-OVERRIDEMK="override.mk"
-CERTIFICATE_FILES_TXT="certificate-files.txt"
+# Base location: $ANDROID_ROOT/vendor/parasite-signatures/common/data
+PRIVATE_KEY_DIR=../../../private-signatures
 
-rm -f data/*.pk8 data/*.x509.pem
+OUT_DIR_ROOT="common"
+OUTDIR="$OUT_DIR_ROOT/data"
+OUT="data"
+
+rm -Rf $OUT_DIR_ROOT
+mkdir -p $OUTDIR
+
+ANDROIDBP="$OUT_DIR_ROOT/Android.bp"
+PRODUCTMK="$OUT_DIR_ROOT/certificates.mk"
+CERTIFICATE_FILES_TXT="certificate-files.txt"
 
 function write_blueprint_header() {
     if [ -f "$ANDROIDBP" ]; then
@@ -34,15 +42,15 @@ function write_blueprint_packages() {
 }
 
 function write_certificate_overrides_makefile_header() {
-    if [ -f "$OVERRIDEMK" ]; then
-        rm "$OVERRIDEMK"
+    if [ -f "$PRODUCTMK" ]; then
+        rm "$PRODUCTMK"
     fi
 
-    cat << EOF >> "$OVERRIDEMK"
+    cat << EOF >> "$PRODUCTMK"
 # Automatically generated file. DO NOT MODIFY
 
 EOF
-    printf '%s\n' "PRODUCT_CERTIFICATE_OVERRIDES := \\" >> "$OVERRIDEMK"
+    printf '%s\n' "PRODUCT_CERTIFICATE_OVERRIDES := \\" >> "$PRODUCTMK"
 }
 
 function write_product_certificate_overrides() {
@@ -54,7 +62,7 @@ function write_product_certificate_overrides() {
         PKGTOOVERRIDECRT="${1%\.override}"
     fi
 
-    printf '\t%s\n' "$PKGTOOVERRIDECRT:$CRTNAME \\" >> "$OVERRIDEMK"
+    printf '\t%s\n' "$PKGTOOVERRIDECRT:$CRTNAME \\" >> "$PRODUCTMK"
 
     unset CRTNAME
     unset PKGTOOVERRIDECRT
@@ -91,10 +99,12 @@ write_certificate_overrides_makefile_header
 
 for certs in `cat $CERTIFICATE_FILES_TXT`; do
     if [[ $certs == *".override" ]]; then
-        write_blueprint_packages "$certs" data
+        write_blueprint_packages "$certs" $OUT
         write_product_certificate_overrides "$certs"
     fi
-    create_symlinks ../../data/"$certs" data
+    create_symlinks "$PRIVATE_KEY_DIR/$certs" $OUTDIR
 done
 
-create_symlinks data/releasekey data
+printf '\n' >> "$PRODUCTMK"
+
+create_symlinks $OUTDIR/releasekey $OUTDIR
