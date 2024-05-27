@@ -12,7 +12,24 @@ cd vendor/parasite-signatures
 ./generate.sh
 ```
 
-* Keys will generated under `../private-signatures`
+* Keys will be generated under `../private-signatures`
+* To signing avb, in your device tree's BoardConfig.mk
+
+```makefile
+TARGET_BUILD_FULLY_SIGN := true
+include vendor/parasite-signatures/BoardConfigSign.mk
+
+TARGET_AVB_KEY_PATH := $(PARASITE_AVB_KEY_PATH)
+TARGET_AVB_ALGORITHM := $(PARASITE_AVB_ALGORITHM)
+
+BOARD_AVB_KEY_PATH := $(TARGET_AVB_KEY_PATH)
+BOARD_AVB_ALGORITHM :=  $(TARGET_AVB_ALGORITHM)
+
+(...)
+
+BOARD_AVB_VENDOR_BOOT_KEY_PATH := $(TARGET_AVB_KEY_PATH)
+BOARD_AVB_VENDOR_BOOT_ALGORITHM := $(TARGET_AVB_ALGORITHM)
+```
 
 ## References
 
