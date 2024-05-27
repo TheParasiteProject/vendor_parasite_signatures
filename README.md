@@ -12,6 +12,8 @@ cd vendor/parasite-signatures/common
 ./generate.sh
 ```
 
+* Keys will generated under `../data`
+
 ## References
 
 * [Sign builds for release](https://source.android.com/docs/core/ota/sign_builds) - from source.android.com
