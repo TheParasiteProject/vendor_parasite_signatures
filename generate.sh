@@ -10,6 +10,11 @@ fi
 
 outdir=../private-signatures
 
+# Check whether dir or symlink exists already
+if [ ! -d $outdir ] || [ ! -f $outdir ]; then
+    mkdir -p $outdir
+fi
+
 MAKEKEY=./make_key
 
 for file in `cat certificate-files.txt`
