@@ -1,4 +1,17 @@
 #!/bin/bash
+
+subject=$1
+if [ -z "$subject" ]
+then
+    echo -e "Subject not specified!"
+    echo -e "Use dummy subject"
+    subject='/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
+fi
+
+outdir=../data
+
+MAKEKEY=./make_key
+
 files=(
     bluetooth
     com.android.adbd.certificate.override
@@ -65,8 +78,5 @@ files=(
 
 for file in "${files[@]}"
 do
-    bash <(sed "s/2048/${2:-2048}/" ../../../development/tools/make_key) \
-        "$file" \
-        '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com' \
-        rsa
+    bash $MAKEKEY $outdir/"$file" "$subject" rsa
 done

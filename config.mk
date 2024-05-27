@@ -52,5 +52,5 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
     com.google.pixel.vibrator.hal:com.google.pixel.vibrator.hal.certificate.override \
     com.qorvo.uwb:com.qorvo.uwb.certificate.override
 
-PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/evolution-priv/keys/testkey
+PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/parasite-signatures/common/data/testkey
 PRODUCT_EXTRA_RECOVERY_KEYS :=
