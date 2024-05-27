@@ -3,6 +3,8 @@
 CWD=$(pwd)
 
 ANDROIDBP="Android.bp"
+OVERRIDEMK="override.mk"
+CERTIFICATE_FILES_TXT="certificate-files.txt"
 
 rm -f data/*.pk8 data/*.x509.pem
 
@@ -29,6 +31,33 @@ function write_blueprint_packages() {
 
     unset CRTNAME
     unset CRTDIRNAME
+}
+
+function write_certificate_overrides_makefile_header() {
+    if [ -f "$OVERRIDEMK" ]; then
+        rm "$OVERRIDEMK"
+    fi
+
+    cat << EOF >> "$OVERRIDEMK"
+# Automatically generated file. DO NOT MODIFY
+
+EOF
+    printf '%s\n' "PRODUCT_CERTIFICATE_OVERRIDES := \\" >> "$OVERRIDEMK"
+}
+
+function write_product_certificate_overrides() {
+    local CRTNAME=$1
+    local PKGTOOVERRIDECRT=
+    if [[ $CRTNAME == *".certificate.override" ]]; then
+        PKGTOOVERRIDECRT="${1%\.certificate\.override}"
+    else
+        PKGTOOVERRIDECRT="${1%\.override}"
+    fi
+
+    printf '\t%s\n' "$PKGTOOVERRIDECRT:$CRTNAME \\" >> "$OVERRIDEMK"
+
+    unset CRTNAME
+    unset PKGTOOVERRIDECRT
 }
 
 function create_symlinks() {
@@ -58,10 +87,12 @@ function create_symlinks() {
 }
 
 write_blueprint_header
+write_certificate_overrides_makefile_header
 
-for certs in `cat certificate-files.txt`; do
+for certs in `cat $CERTIFICATE_FILES_TXT`; do
     if [[ $certs == *".override" ]]; then
         write_blueprint_packages "$certs" data
+        write_product_certificate_overrides "$certs"
     fi
     create_symlinks ../../data/"$certs" data
 done
