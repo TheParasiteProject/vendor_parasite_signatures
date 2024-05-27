@@ -67,5 +67,6 @@ for file in "${files[@]}"
 do
     bash <(sed "s/2048/${2:-2048}/" ../../../development/tools/make_key) \
         "$file" \
-        '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
+        '/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com' \
+        rsa
 done
