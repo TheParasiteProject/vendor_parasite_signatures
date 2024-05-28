@@ -1,6 +1,13 @@
 # vendor_parasite-signatures
 
 ```bash
+cd build/soong
+git remote add --fetch tpr https://github.com/TheParasiteProject/build_soong.git
+# https://github.com/TheParasiteProject/build_soong/commit/fd2ec63a8af2df926050abf33014cd4555fa8ffe
+git cherry-pick fd2ec63a8af2df926050abf33014cd4555fa8ffe
+```
+
+```bash
 croot && git clone https://github.com/TheParasiteProject/vendor_parasite-signatures vendor/parasite-signatures
 ```
 
@@ -13,7 +20,13 @@ cd vendor/parasite-signatures
 ```
 
 * Keys will be generated under `../private-signatures`
-* To signing avb, in your device tree's BoardConfig.mk
+* To signing builds, in your device tree's `device.mk`
+
+```makefile
+TARGET_BUILD_FULLY_SIGN := true
+```
+
+* To signing avb, in your device tree's `BoardConfig.mk`
 
 ```makefile
 TARGET_BUILD_FULLY_SIGN := true
