@@ -2,7 +2,5 @@ CERTIFICATE_DIRECTORY_ROOT ?= vendor/parasite-signatures
 CERTIFICATE_COMMON := $(CERTIFICATE_DIRECTORY_ROOT)/common
 
 ifeq ($(TARGET_BUILD_FULLY_SIGN),true)
-PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_COMMON)/data/releasekey
-PRODUCT_OTA_PUBLIC_KEYS := $(CERTIFICATE_COMMON)/data/releasekey.x509.pem
 $(call inherit-product, $(CERTIFICATE_COMMON)/certificates.mk)
 endif

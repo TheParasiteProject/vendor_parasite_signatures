@@ -28,17 +28,19 @@ EOF
 }
 
 function write_blueprint_packages() {
-    local CRTNAME=$1
-    local CRTDIRNAME=$2
+    local cert_dir_name=$2
 
-    printf 'android_app_certificate {\n' >> "$ANDROIDBP"
-    printf '\tname: "%s",\n' "$CRTNAME" >> "$ANDROIDBP"
-    printf '\tcertificate: "%s",\n' "$CRTDIRNAME/$CRTNAME" >> "$ANDROIDBP"
-    printf '}\n' >> "$ANDROIDBP"
-    printf '\n' >> "$ANDROIDBP"
-
-    unset CRTNAME
-    unset CRTDIRNAME
+    local files=(`cat $1 | grep '.override'`)
+    for ((i=0; i<"${#files[@]}"; i++)); do
+        file_name="${files[$i]}"
+        printf 'android_app_certificate {\n' >> "$ANDROIDBP"
+        printf '\tname: "%s",\n' "$file_name" >> "$ANDROIDBP"
+        printf '\tcertificate: "%s",\n' "$cert_dir_name"/"$file_name" >> "$ANDROIDBP"
+        printf "}\n" >> "$ANDROIDBP"
+        if [ $i -lt $((${#files[@]} - 1)) ]; then
+            printf "\n" >> "$ANDROIDBP"
+        fi
+    done
 }
 
 function write_certificate_overrides_makefile_header() {
@@ -50,22 +52,31 @@ function write_certificate_overrides_makefile_header() {
 # Automatically generated file. DO NOT MODIFY
 
 EOF
-    printf '%s\n' "PRODUCT_CERTIFICATE_OVERRIDES := \\" >> "$PRODUCTMK"
 }
 
 function write_product_certificate_overrides() {
-    local CRTNAME=$1
-    local PKGTOOVERRIDECRT=
-    if [[ $CRTNAME == *".certificate.override" ]]; then
-        PKGTOOVERRIDECRT="${1%\.certificate\.override}"
-    else
-        PKGTOOVERRIDECRT="${1%\.override}"
-    fi
+    printf '%s\n' "PRODUCT_CERTIFICATE_OVERRIDES := \\" >> "$PRODUCTMK"
 
-    printf '\t%s\n' "$PKGTOOVERRIDECRT:$CRTNAME \\" >> "$PRODUCTMK"
+    local files=(`cat $1 | grep '.override'`)
+    local file_name=
+    local file_to_overrides=
+    for ((i=0; i<"${#files[@]}"; i++)); do
+        file_name="${files[$i]}"
+        if [[ $file_name == *".certificate.override" ]]; then
+            file_to_overrides="${file_name%\.certificate\.override}"
+        else
+            file_to_overrides="${file_name%\.override}"
+        fi
+        printf '\t%s' "$file_to_overrides:$file_name" >> "$PRODUCTMK"
+        if [ $i -lt $((${#files[@]} - 1)) ]; then
+            printf '%s\n' " \\" >> "$PRODUCTMK"
+        else
+            printf '\n\n' >> "$PRODUCTMK"
+        fi
+    done
 
-    unset CRTNAME
-    unset PKGTOOVERRIDECRT
+    echo 'PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_COMMON)/data/releasekey' >> "$PRODUCTMK"
+    echo 'PRODUCT_OTA_PUBLIC_KEYS := $(CERTIFICATE_COMMON)/data/releasekey.x509.pem' >> "$PRODUCTMK"
 }
 
 function create_symlinks() {
@@ -73,44 +84,37 @@ function create_symlinks() {
         return
     fi
 
-    local TARGETFILE=$1
-    local DIRTOWORK=$2
-    local ISCERT=$3
+    local target_file=$1
+    local dir_to_work=$2
+    local is_cert=$3
 
-    cd "$DIRTOWORK"
+    cd "$dir_to_work"
 
-    fileName=`basename $TARGETFILE`
+    local file_name=`basename $target_file`
 
-    fileNameDest="$TARGETFILE"
-    if [ $fileName == releasekey ]; then
-        fileNameDest=testkey
+    local file_name_with_dest="$target_file"
+    if [ $file_name == releasekey ]; then
+        file_name_with_dest=testkey
     fi
 
-    if [[ $3 = true ]]; then
-        ln -fs $fileNameDest.pk8 "$fileName".pk8
-        ln -fs $fileNameDest.x509.pem "$fileName".x509.pem
+    if [[ $is_cert = true ]]; then
+        ln -fs $file_name_with_dest.pk8 "$file_name".pk8
+        ln -fs $file_name_with_dest.x509.pem "$file_name".x509.pem
     else
-        ln -fs $fileNameDest "$fileName"
+        ln -fs $file_name_with_dest "$file_name"
     fi
 
     cd $CWD
-
-    unset TARGETFILE
-    unset DIRTOWORK
 }
 
 write_blueprint_header
 write_certificate_overrides_makefile_header
+write_blueprint_packages $CERTIFICATE_FILES_TXT $OUT
+write_product_certificate_overrides $CERTIFICATE_FILES_TXT
 
 for certs in `cat $CERTIFICATE_FILES_TXT`; do
-    if [[ $certs == *".override" ]]; then
-        write_blueprint_packages "$certs" $OUT
-        write_product_certificate_overrides "$certs"
-    fi
     create_symlinks "$PRIVATE_KEY_DIR/$certs" $OUTDIR true
 done
-
-printf '\n' >> "$PRODUCTMK"
 
 create_symlinks $OUTDIR/releasekey $OUTDIR true
 create_symlinks "$PRIVATE_KEY_DIR/avb_pkmd.bin" $OUTDIR

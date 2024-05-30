@@ -1,36 +1,104 @@
 #!/bin/bash
 
 AVBTOOL=.bin/avbtool
-
-subject=$1
-if [ -z "$subject" ]
-then
-    echo -e "Subject not specified!"
-    echo -e "Use dummy subject"
-    subject='/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com'
-fi
-
-outdir=../private-signatures
-
-# Check whether dir or symlink exists already
-if [ ! -d $outdir ] || [ ! -f $outdir ]; then
-    mkdir -p $outdir
-fi
-
 MAKEKEY=./make_key
 
-for file in `cat certificate-files.txt`
-do
-    if [[ $file = *".override" ]]; then
-        bit=4096
-    fi
-    bash $MAKEKEY $outdir/"$file" "$subject" $bit
-    unset bit
-done
+OUTDIR=../private-signatures
 
-# Generate avb_pkmd.bin
-# As we use same key for testkey and releasekey,
-# use testkey for generation
-$AVBTOOL extract_public_key \
-  --key $outdir/testkey-private.pem \
-  --output $outdir/avb_pkmd.bin
+CERTIFICATE_FILES_TXT="certificate-files.txt"
+
+# Check whether dir or symlink exists already
+if [ ! -d $OUTDIR ] || [ ! -f $OUTDIR ]; then
+    mkdir -p $OUTDIR
+fi
+
+function confirm() {
+    while true; do
+        read -r -p "$1 (yes/no): " input
+        case "$input" in
+            [yY][eE][sS]|[yY]) echo "yes"; return ;;
+            [nN][oO]|[nN]) echo "no"; return ;;
+            *) ;;
+        esac
+    done
+}
+
+function prompt_key_size() {
+    while true; do
+        read -p "$1" input
+        if [[ "$input" == "2048" || "$input" == "4096" ]]; then
+            echo "$input"
+            break
+        fi
+    done
+}
+
+function prompt() {
+    while true; do
+        read -p "$1" input
+        if [[ -n "$input" ]]; then
+            echo "$input"
+            break
+        fi
+    done
+}
+
+function user_input() {
+    if [[ $(confirm "Do you want to customize the key size and subject?") == "yes" ]]; then
+        key_size=$(prompt_key_size "Enter the key size (2048 or 4096, APEX will always use 4096): ")
+        country_code=$(prompt "Enter the country code (e.g., US): ")
+        state=$(prompt "Enter the state or province (e.g., California): ")
+        city=$(prompt "Enter the city or locality (e.g., Mountain View): ")
+        org=$(prompt "Enter the organization (e.g., Android): ")
+        ou=$(prompt "Enter the organizational unit (e.g., Android): ")
+        cn=$(prompt "Enter the common name (e.g., Android): ")
+        email=$(prompt "Enter the email address (e.g., android@android.com): ")
+
+        echo "Subject information to be used:"
+        echo "Key Size: $key_size"
+        echo "Country Code: $country_code"
+        echo "State/Province: $state"
+        echo "City/Locality: $city"
+        echo "Organization (O): $org"
+        echo "Organizational Unit (OU): $ou"
+        echo "Common Name (CN): $cn"
+        echo "Email Address: $email"
+
+        if [[ $(confirm "Is this information correct?") != "yes" ]]; then
+            echo "Generation aborted."
+            exit 0
+        fi
+    else
+        key_size='2048'
+        country_code='US'
+        state='California'
+        city='Mountain View'
+        org='Android'
+        ou='Android'
+        cn='Android'
+        email='android@android.com'
+    fi
+
+    subject="/C=$country_code/ST=$state/L=$city/O=$org/OU=$ou/CN=$cn/emailAddress=$email"
+}
+
+function generate_keys() {
+    for file in `cat $1`
+    do
+        if [[ $file = *".override" ]]; then
+            bash $MAKEKEY "$2/$file" "$subject" 4096
+        else
+            bash $MAKEKEY "$2/$file" "$subject" $key_size
+        fi
+    done
+
+    # Generate avb_pkmd.bin
+    # As we use same key for testkey and releasekey,
+    # use testkey for generation
+    $AVBTOOL extract_public_key \
+      --key "$2/testkey-private.pem" \
+      --output "$2/avb_pkmd.bin"
+}
+
+user_input
+generate_keys $CERTIFICATE_FILES_TXT $OUTDIR
