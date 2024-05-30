@@ -27,3 +27,10 @@ do
     bash $MAKEKEY $outdir/"$file" "$subject" $bit
     unset bit
 done
+
+# Generate avb_pkmd.bin
+# As we use same key for testkey and releasekey,
+# use testkey for generation
+$AVBTOOL extract_public_key \
+  --key $outdir/testkey-private.pem \
+  --output $outdir/avb_pkmd.bin
