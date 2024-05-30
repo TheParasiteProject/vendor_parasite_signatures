@@ -19,5 +19,9 @@ MAKEKEY=./make_key
 
 for file in `cat certificate-files.txt`
 do
-    bash $MAKEKEY $outdir/"$file" "$subject" rsa
+    if [[ $file = *".override" ]]; then
+        bit=4096
+    fi
+    bash $MAKEKEY $outdir/"$file" "$subject" rsa $bit
+    unset bit
 done

@@ -17,9 +17,9 @@
 # Generates a public/private key pair suitable for use in signing
 # android .apks and OTA update packages.
 
-if [ "$#" -lt 2 -o "$#" -gt 3 ]; then
+if [ "$#" -lt 2 -o "$#" -gt 4 ]; then
   cat <<EOF
-Usage: $0 <name> <subject> [<keytype>]
+Usage: $0 <name> <subject> [<keytype>] <bit>
 
 Creates <name>.pk8 key and <name>.x509.pem cert.  Cert contains the
 given <subject>. A keytype of "rsa" or "ec" is accepted.
@@ -33,8 +33,14 @@ if [[ -e $1.pk8 || -e $1.x509.pem ]]; then
   exit 1
 fi
 
+if ! [[ $4 =~ ^[0-9]+$ ]]; then
+  bit=2048
+else
+  bit=$4
+fi
+
 if [ "${3}" = "rsa" -o "$#" -eq 2 ]; then
-  openssl genrsa -out $1-private.pem -f4 2048
+  openssl genrsa -out $1-private.pem -f4 $bit
   openssl rsa -in $1-private.pem -pubout -out $1-public.pem
   hash="-sha256"
 else

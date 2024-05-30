@@ -13,6 +13,7 @@ com.android.connectivity.resources.certificate.override
 com.android.conscrypt.certificate.override
 com.android.devicelock.certificate.override
 com.android.extservices.certificate.override
+com.android.graphics.pdf.certificate.override
 com.android.hardware.biometrics.face.virtual.override
 com.android.hardware.biometrics.fingerprint.virtual.override
 com.android.hardware.boot.certificate.override
@@ -49,9 +50,11 @@ com.android.vndk.current.certificate.override
 com.android.wifi.certificate.override
 com.android.wifi.dialog.certificate.override
 com.android.wifi.resources.certificate.override
+com.google.pixel.camera.hal.certificate.override
 com.google.pixel.vibrator.hal.certificate.override
 com.qorvo.uwb.certificate.override
 cts_uicc_2021
+cyngn-app
 media
 networkstack
 platform
