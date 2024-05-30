@@ -22,6 +22,6 @@ do
     if [[ $file = *".override" ]]; then
         bit=4096
     fi
-    bash $MAKEKEY $outdir/"$file" "$subject" rsa $bit
+    bash $MAKEKEY $outdir/"$file" "$subject" $bit
     unset bit
 done
