@@ -15,6 +15,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.conscrypt:com.android.conscrypt.certificate.override \
 	com.android.devicelock:com.android.devicelock.certificate.override \
 	com.android.extservices:com.android.extservices.certificate.override \
+	com.android.graphics.pdf:com.android.graphics.pdf.certificate.override \
 	com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.override \
 	com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.override \
 	com.android.hardware.boot:com.android.hardware.boot.certificate.override \
@@ -51,6 +52,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.wifi:com.android.wifi.certificate.override \
 	com.android.wifi.dialog:com.android.wifi.dialog.certificate.override \
 	com.android.wifi.resources:com.android.wifi.resources.certificate.override \
+	com.google.pixel.camera.hal:com.google.pixel.camera.hal.certificate.override \
 	com.google.pixel.vibrator.hal:com.google.pixel.vibrator.hal.certificate.override \
 	com.qorvo.uwb:com.qorvo.uwb.certificate.override \
 

@@ -71,6 +71,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+	name: "com.android.graphics.pdf.certificate.override",
+	certificate: "data/com.android.graphics.pdf.certificate.override",
+}
+
+android_app_certificate {
 	name: "com.android.hardware.biometrics.face.virtual.override",
 	certificate: "data/com.android.hardware.biometrics.face.virtual.override",
 }
@@ -248,6 +253,11 @@ android_app_certificate {
 android_app_certificate {
 	name: "com.android.wifi.resources.certificate.override",
 	certificate: "data/com.android.wifi.resources.certificate.override",
+}
+
+android_app_certificate {
+	name: "com.google.pixel.camera.hal.certificate.override",
+	certificate: "data/com.google.pixel.camera.hal.certificate.override",
 }
 
 android_app_certificate {
