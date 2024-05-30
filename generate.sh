@@ -12,6 +12,11 @@ if [ ! -d $OUTDIR ] || [ ! -f $OUTDIR ]; then
     mkdir -p $OUTDIR
 fi
 
+if [ "$#" -gt 1 ] && [ "$#" -lt 3 ]; then
+    SKIP_PROMPT=true
+    echo 
+fi
+
 function confirm() {
     while true; do
         read -r -p "$1 (yes/no): " input
@@ -98,5 +103,15 @@ function generate_keys() {
       --output "$2/avb_pkmd.bin"
 }
 
-user_input
+if [[ $SKIP_PROMPT = true ]]; then
+    subject="$1"
+    if ! [[ $2 =~ ^[0-9]+$ ]]; then
+      key_size=2048
+    else
+      key_size="$2"
+    fi
+else
+    user_input
+fi
+
 generate_keys $CERTIFICATE_FILES_TXT $OUTDIR
