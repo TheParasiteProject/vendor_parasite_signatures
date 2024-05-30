@@ -33,7 +33,8 @@ TARGET_BUILD_FULLY_SIGN := true
 include vendor/parasite-signatures/BoardConfigSign.mk
 
 TARGET_AVB_KEY_PATH := $(PARASITE_AVB_KEY_PATH)
-TARGET_AVB_ALGORITHM := $(PARASITE_AVB_ALGORITHM)
+# Differs what bit (e.g. 2048) you selected for key generation
+TARGET_AVB_ALGORITHM := SHA256_RSA2048
 
 BOARD_AVB_KEY_PATH := $(TARGET_AVB_KEY_PATH)
 BOARD_AVB_ALGORITHM :=  $(TARGET_AVB_ALGORITHM)
