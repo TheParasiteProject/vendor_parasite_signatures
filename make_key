@@ -17,12 +17,12 @@
 # Generates a public/private key pair suitable for use in signing
 # android .apks and OTA update packages.
 
-if [ "$#" -lt 2 -o "$#" -gt 4 ]; then
+if [ "$#" -lt 2 -o "$#" -gt 3 ]; then
   cat <<EOF
-Usage: $0 <name> <subject> [<keytype>] <bit>
+Usage: $0 <name> <subject> [<bit>]
 
 Creates <name>.pk8 key and <name>.x509.pem cert.  Cert contains the
-given <subject>. A keytype of "rsa" or "ec" is accepted.
+given <subject>. Use given <bit> if set.
 EOF
   exit 2
 fi
@@ -33,25 +33,20 @@ if [[ -e $1.pk8 || -e $1.x509.pem ]]; then
   exit 1
 fi
 
-if ! [[ $4 =~ ^[0-9]+$ ]]; then
+if ! [[ $3 =~ ^[0-9]+$ ]]; then
   bit=2048
 else
-  bit=$4
+  bit=$3
 fi
 
-if [ "${3}" = "rsa" -o "$#" -eq 2 ]; then
-  openssl genrsa -out $1-private.pem -f4 $bit
-  openssl rsa -in $1-private.pem -pubout -out $1-public.pem
-  hash="-sha256"
-else
-  echo "Only accepts RSA keytypes."
-  exit 1
-fi
+openssl genrsa -out $1-private.pem -f4 $bit
+hash="-sha256"
 
 openssl req -new -x509 ${hash} -key $1-private.pem -out $1.x509.pem \
   -days 10000 -subj "$2" &
 
-openssl pkcs8 -in $1-private.pem -topk8 -outform DER -out $1.pk8 -nocrypt
+echo "creating ${1}.pk8 with no password"
+openssl pkcs8 -in $1-private.pem -topk8 -outform DER -out $1.pk8 -nocrypt 2>/dev/null
 
 wait
 wait
