@@ -93,10 +93,8 @@ function generate_keys() {
     done
 
     # Generate avb_pkmd.bin
-    # As we use same key for testkey and releasekey,
-    # use testkey for generation
     $AVBTOOL extract_public_key \
-      --key "$2/testkey-private.pem" \
+      --key "$2/releasekey-private.pem" \
       --output "$2/avb_pkmd.bin"
 }
 

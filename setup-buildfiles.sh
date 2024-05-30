@@ -84,24 +84,19 @@ function create_symlinks() {
         return
     fi
 
-    local target_file=$1
+    local source_file=$1
     local dir_to_work=$2
     local is_cert=$3
 
     cd "$dir_to_work"
 
-    local file_name=`basename $target_file`
-
-    local file_name_with_dest="$target_file"
-    if [ $file_name == releasekey ]; then
-        file_name_with_dest=testkey
-    fi
+    local target_file=`basename $source_file`
 
     if [[ $is_cert = true ]]; then
-        ln -fs $file_name_with_dest.pk8 "$file_name".pk8
-        ln -fs $file_name_with_dest.x509.pem "$file_name".x509.pem
+        ln -fs $source_file.pk8 "$target_file".pk8
+        ln -fs $source_file.x509.pem "$target_file".x509.pem
     else
-        ln -fs $file_name_with_dest "$file_name"
+        ln -fs $source_file "$target_file"
     fi
 
     cd $CWD
@@ -116,5 +111,4 @@ for certs in `cat $CERTIFICATE_FILES_TXT`; do
     create_symlinks "$PRIVATE_KEY_DIR/$certs" $OUTDIR true
 done
 
-create_symlinks $OUTDIR/releasekey $OUTDIR true
 create_symlinks "$PRIVATE_KEY_DIR/avb_pkmd.bin" $OUTDIR
