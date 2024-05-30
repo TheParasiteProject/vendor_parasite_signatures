@@ -76,13 +76,13 @@ android_app_certificate {
 }
 
 android_app_certificate {
-	name: "com.android.hardware.biometrics.face.virtual.override",
-	certificate: "data/com.android.hardware.biometrics.face.virtual.override",
+	name: "com.android.hardware.biometrics.face.virtual.certificate.override",
+	certificate: "data/com.android.hardware.biometrics.face.virtual.certificate.override",
 }
 
 android_app_certificate {
-	name: "com.android.hardware.biometrics.fingerprint.virtual.override",
-	certificate: "data/com.android.hardware.biometrics.fingerprint.virtual.override",
+	name: "com.android.hardware.biometrics.fingerprint.virtual.certificate.override",
+	certificate: "data/com.android.hardware.biometrics.fingerprint.virtual.certificate.override",
 }
 
 android_app_certificate {
@@ -91,8 +91,8 @@ android_app_certificate {
 }
 
 android_app_certificate {
-	name: "com.android.hardware.cas.override",
-	certificate: "data/com.android.hardware.cas.override",
+	name: "com.android.hardware.cas.certificate.override",
+	certificate: "data/com.android.hardware.cas.certificate.override",
 }
 
 android_app_certificate {
@@ -269,4 +269,3 @@ android_app_certificate {
 	name: "com.qorvo.uwb.certificate.override",
 	certificate: "data/com.qorvo.uwb.certificate.override",
 }
-

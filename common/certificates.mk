@@ -16,10 +16,10 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.devicelock:com.android.devicelock.certificate.override \
 	com.android.extservices:com.android.extservices.certificate.override \
 	com.android.graphics.pdf:com.android.graphics.pdf.certificate.override \
-	com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.override \
-	com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.override \
+	com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.certificate.override \
+	com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.certificate.override \
 	com.android.hardware.boot:com.android.hardware.boot.certificate.override \
-	com.android.hardware.cas:com.android.hardware.cas.override \
+	com.android.hardware.cas:com.android.hardware.cas.certificate.override \
 	com.android.hardware.wifi:com.android.hardware.wifi.certificate.override \
 	com.android.healthfitness:com.android.healthfitness.certificate.override \
 	com.android.hotspot2.osulogin:com.android.hotspot2.osulogin.certificate.override \
@@ -54,5 +54,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.wifi.resources:com.android.wifi.resources.certificate.override \
 	com.google.pixel.camera.hal:com.google.pixel.camera.hal.certificate.override \
 	com.google.pixel.vibrator.hal:com.google.pixel.vibrator.hal.certificate.override \
-	com.qorvo.uwb:com.qorvo.uwb.certificate.override \
+	com.qorvo.uwb:com.qorvo.uwb.certificate.override
 
+PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_COMMON)/data/releasekey
+PRODUCT_OTA_PUBLIC_KEYS := $(CERTIFICATE_COMMON)/data/releasekey.x509.pem
