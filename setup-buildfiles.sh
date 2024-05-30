@@ -75,18 +75,23 @@ function create_symlinks() {
 
     local TARGETFILE=$1
     local DIRTOWORK=$2
+    local ISCERT=$3
 
     cd "$DIRTOWORK"
 
     fileName=`basename $TARGETFILE`
 
-    certNameDest="$TARGETFILE"
+    fileNameDest="$TARGETFILE"
     if [ $fileName == releasekey ]; then
-        certNameDest=testkey
+        fileNameDest=testkey
     fi
 
-    ln -fs $certNameDest.pk8 "$fileName".pk8
-    ln -fs $certNameDest.x509.pem "$fileName".x509.pem
+    if [[ $3 = true ]]; then
+        ln -fs $fileNameDest.pk8 "$fileName".pk8
+        ln -fs $fileNameDest.x509.pem "$fileName".x509.pem
+    else
+        ln -fs $fileNameDest "$fileName"
+    fi
 
     cd $CWD
 
@@ -102,9 +107,10 @@ for certs in `cat $CERTIFICATE_FILES_TXT`; do
         write_blueprint_packages "$certs" $OUT
         write_product_certificate_overrides "$certs"
     fi
-    create_symlinks "$PRIVATE_KEY_DIR/$certs" $OUTDIR
+    create_symlinks "$PRIVATE_KEY_DIR/$certs" $OUTDIR true
 done
 
 printf '\n' >> "$PRODUCTMK"
 
-create_symlinks $OUTDIR/releasekey $OUTDIR
+create_symlinks $OUTDIR/releasekey $OUTDIR true
+create_symlinks "$PRIVATE_KEY_DIR/avb_pkmd.bin" $OUTDIR
