@@ -1,5 +1,7 @@
 #!/bin/bash
 
+AVBTOOL=.bin/avbtool
+
 subject=$1
 if [ -z "$subject" ]
 then
