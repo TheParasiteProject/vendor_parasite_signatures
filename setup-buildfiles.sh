@@ -2,8 +2,8 @@
 
 CWD=$(pwd)
 
-# Base location: $ANDROID_ROOT/vendor/parasite-signatures/common/data
-PRIVATE_KEY_DIR=../../../private-signatures
+# Base location: $ANDROID_ROOT/vendor/parasite/signatures/common/data
+PRIVATE_KEY_DIR=../../../../private-signatures
 
 OUT_DIR_ROOT="common"
 OUTDIR="$OUT_DIR_ROOT/data"

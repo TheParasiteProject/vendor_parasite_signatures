@@ -1,25 +1,25 @@
-# vendor_parasite-signatures
+# vendor_parasite_signatures
 
 ```bash
 cd build/soong
 git remote add --fetch tpr https://github.com/TheParasiteProject/build_soong.git
-# https://github.com/TheParasiteProject/build_soong/commit/fd2ec63a8af2df926050abf33014cd4555fa8ffe
-git cherry-pick fd2ec63a8af2df926050abf33014cd4555fa8ffe
+# https://github.com/TheParasiteProject/build_soong/commit/0fc0a6c620e031c46882fdd0363c1cda9d0f0b7b
+git cherry-pick 0fc0a6c620e031c46882fdd0363c1cda9d0f0b7b
 ```
 
 ```bash
-croot && git clone https://github.com/TheParasiteProject/vendor_parasite-signatures vendor/parasite-signatures
+croot && git clone https://github.com/TheParasiteProject/vendor_parasite_signatures vendor/parasite/signatures
 ```
 
 ```bash
-cd vendor/parasite-signatures
+cd vendor/parasite/signatures
 ```
 
 ```bash
 ./generate.sh
 ```
 
-* Keys will be generated under `../private-signatures`
+* Keys will be generated under `../../private-signatures`
 * To signing builds, in your device tree's `device.mk`
 
 ```makefile
@@ -30,7 +30,7 @@ TARGET_BUILD_FULLY_SIGN := true
 
 ```makefile
 TARGET_BUILD_FULLY_SIGN := true
-include vendor/parasite-signatures/BoardConfigSign.mk
+include vendor/parasite/signatures/BoardConfigSign.mk
 
 TARGET_AVB_KEY_PATH := $(PARASITE_AVB_KEY_PATH)
 # Differs what bit (e.g. 2048) you selected for key generation

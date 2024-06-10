@@ -1,4 +1,4 @@
-CERTIFICATE_DIRECTORY_ROOT ?= vendor/parasite-signatures
+CERTIFICATE_DIRECTORY_ROOT ?= vendor/parasite/signatures
 CERTIFICATE_COMMON := $(CERTIFICATE_DIRECTORY_ROOT)/common
 
 ifeq ($(TARGET_BUILD_FULLY_SIGN),true)
