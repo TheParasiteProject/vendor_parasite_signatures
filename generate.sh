@@ -3,7 +3,7 @@
 AVBTOOL=.bin/avbtool
 MAKEKEY=./make_key
 
-OUTDIR=../private-signatures
+OUTDIR=../../private-signatures
 
 CERTIFICATE_FILES_TXT="certificate-files.txt"
 
