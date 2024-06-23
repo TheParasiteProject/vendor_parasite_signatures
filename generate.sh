@@ -97,10 +97,12 @@ function generate_keys() {
         fi
     done
 
-    # Generate avb_pkmd.bin
-    $AVBTOOL extract_public_key \
-      --key "$2/releasekey-private.pem" \
-      --output "$2/avb_pkmd.bin"
+    if [[ ! -f "$2/avb_pkmd.bin" ]]; then
+        # Generate avb_pkmd.bin
+        $AVBTOOL extract_public_key \
+          --key "$2/releasekey-private.pem" \
+          --output "$2/avb_pkmd.bin"
+    fi
 }
 
 if [[ $SKIP_PROMPT = true ]]; then
