@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AVBTOOL=.bin/avbtool
+AVBTOOL=../../../external/avb/avbtool.py
 MAKEKEY=./make_key
 
 OUTDIR=../../private-signatures
