@@ -90,10 +90,15 @@ function user_input() {
 function generate_keys() {
     for file in `cat $1`
     do
-        if [[ $file = *".override" ]]; then
-            bash $MAKEKEY "$2/$file" "$subject" 4096
+        if [[ (-f "$2/${file}.x509.pem" && -f "$2/${file}.pk8" && -f "$2/${file}-private.pem") ||
+              (-f "$2/${file}.certificate.override.x509.pem" && -f "$2/${file}.certificate.override.pk8" && -f "$2/${file}.certificate.override-private.pem") ]]; then
+            echo "$file already exists. Skipping..."
         else
-            bash $MAKEKEY "$2/$file" "$subject" $key_size
+            if [[ $file = *".override" ]]; then
+                bash $MAKEKEY "$2/$file" "$subject" 4096
+            else
+                bash $MAKEKEY "$2/$file" "$subject" $key_size
+            fi
         fi
     done
 
