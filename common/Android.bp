@@ -151,6 +151,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+	name: "com.android.nfcservices.certificate.override",
+	certificate: "data/com.android.nfcservices.certificate.override",
+}
+
+android_app_certificate {
 	name: "com.android.ondevicepersonalization.certificate.override",
 	certificate: "data/com.android.ondevicepersonalization.certificate.override",
 }

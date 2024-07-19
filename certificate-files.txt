@@ -29,6 +29,7 @@ com.android.media.swcodec.certificate.override
 com.android.nearby.halfsheet.certificate.override
 com.android.networkstack.tethering.certificate.override
 com.android.neuralnetworks.certificate.override
+com.android.nfcservices.certificate.override
 com.android.ondevicepersonalization.certificate.override
 com.android.os.statsd.certificate.override
 com.android.permission.certificate.override
