@@ -5,6 +5,7 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.adservices.api:com.android.adservices.api.certificate.override \
 	com.android.adservices:com.android.adservices.certificate.override \
 	com.android.appsearch:com.android.appsearch.certificate.override \
+	com.android.appsearch.apk:com.android.appsearch.apk.certificate.override \
 	com.android.art:com.android.art.certificate.override \
 	com.android.bluetooth:com.android.bluetooth.certificate.override \
 	com.android.btservices:com.android.btservices.certificate.override \
@@ -15,11 +16,14 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.conscrypt:com.android.conscrypt.certificate.override \
 	com.android.devicelock:com.android.devicelock.certificate.override \
 	com.android.extservices:com.android.extservices.certificate.override \
+	com.android.hardware.authsecret:com.android.hardware.authsecret.certificate.override \
 	com.android.graphics.pdf:com.android.graphics.pdf.certificate.override \
 	com.android.hardware.biometrics.face.virtual:com.android.hardware.biometrics.face.virtual.certificate.override \
 	com.android.hardware.biometrics.fingerprint.virtual:com.android.hardware.biometrics.fingerprint.virtual.certificate.override \
 	com.android.hardware.boot:com.android.hardware.boot.certificate.override \
 	com.android.hardware.cas:com.android.hardware.cas.certificate.override \
+	com.android.hardware.neuralnetworks:com.android.hardware.neuralnetworks.certificate.override \
+	com.android.hardware.rebootescrow:com.android.hardware.rebootescrow.certificate.override \
 	com.android.hardware.wifi:com.android.hardware.wifi.certificate.override \
 	com.android.healthfitness:com.android.healthfitness.certificate.override \
 	com.android.hotspot2.osulogin:com.android.hotspot2.osulogin.certificate.override \
@@ -32,9 +36,11 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.networkstack.tethering:com.android.networkstack.tethering.certificate.override \
 	com.android.neuralnetworks:com.android.neuralnetworks.certificate.override \
 	com.android.nfcservices:com.android.nfcservices.certificate.override \
+	com.android.nfcservices:com.android.nfcservices.certificate.override \
 	com.android.ondevicepersonalization:com.android.ondevicepersonalization.certificate.override \
 	com.android.os.statsd:com.android.os.statsd.certificate.override \
 	com.android.permission:com.android.permission.certificate.override \
+	com.android.profiling:com.android.profiling.certificate.override \
 	com.android.resolv:com.android.resolv.certificate.override \
 	com.android.rkpd:com.android.rkpd.certificate.override \
 	com.android.runtime:com.android.runtime.certificate.override \
@@ -55,7 +61,17 @@ PRODUCT_CERTIFICATE_OVERRIDES := \
 	com.android.wifi.resources:com.android.wifi.resources.certificate.override \
 	com.google.pixel.camera.hal:com.google.pixel.camera.hal.certificate.override \
 	com.google.pixel.vibrator.hal:com.google.pixel.vibrator.hal.certificate.override \
-	com.qorvo.uwb:com.qorvo.uwb.certificate.override
+	com.qorvo.uwb:com.qorvo.uwb.certificate.override \
+	AdServicesApk:com.android.adservices.api.certificate.override \
+	FederatedCompute:com.android.federatedcompute.certificate.override \
+	HealthConnectBackupRestore:com.android.health.connect.backuprestore.certificate.override \
+	HealthConnectController:com.android.healthconnect.controller.certificate.override \
+	OsuLogin:com.android.hotspot2.osulogin.certificate.override \
+	SafetyCenterResources:com.android.safetycenter.resources.certificate.override \
+	ServiceConnectivityResources:com.android.connectivity.resources.certificate.override \
+	ServiceUwbResources:com.android.uwb.resources.certificate.override \
+	ServiceWifiResources:com.android.wifi.resources.certificate.override \
+	WifiDialog:com.android.wifi.dialog.certificate.override
 
 PRODUCT_DEFAULT_DEV_CERTIFICATE := $(CERTIFICATE_COMMON)/data/releasekey
 PRODUCT_OTA_PUBLIC_KEYS := $(CERTIFICATE_COMMON)/data/releasekey.x509.pem

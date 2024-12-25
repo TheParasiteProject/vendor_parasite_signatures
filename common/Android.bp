@@ -16,6 +16,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.appsearch.apk.certificate.override",
+    certificate: "data/com.android.appsearch.apk.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.appsearch.certificate.override",
     certificate: "data/com.android.appsearch.certificate.override",
 }
@@ -71,8 +76,18 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.federatedcompute.certificate.override",
+    certificate: "data/com.android.federatedcompute.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.graphics.pdf.certificate.override",
     certificate: "data/com.android.graphics.pdf.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.authsecret.certificate.override",
+    certificate: "data/com.android.hardware.authsecret.certificate.override",
 }
 
 android_app_certificate {
@@ -96,8 +111,28 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.hardware.neuralnetworks.certificate.override",
+    certificate: "data/com.android.hardware.neuralnetworks.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.rebootescrow.certificate.override",
+    certificate: "data/com.android.hardware.rebootescrow.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.hardware.wifi.certificate.override",
     certificate: "data/com.android.hardware.wifi.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.health.connect.backuprestore.certificate.override",
+    certificate: "data/com.android.health.connect.backuprestore.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.healthconnect.controller.certificate.override",
+    certificate: "data/com.android.healthconnect.controller.certificate.override",
 }
 
 android_app_certificate {
@@ -168,6 +203,11 @@ android_app_certificate {
 android_app_certificate {
     name: "com.android.permission.certificate.override",
     certificate: "data/com.android.permission.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.profiling.certificate.override",
+    certificate: "data/com.android.profiling.certificate.override",
 }
 
 android_app_certificate {
