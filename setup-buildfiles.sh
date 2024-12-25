@@ -132,3 +132,4 @@ for certs in $(cat $CERTIFICATE_FILES_TXT); do
 done
 
 create_symlinks "$PRIVATE_KEY_DIR/avb_pkmd.bin" $OUTDIR
+[ -x "$(command -v bpfmt)" ] && bpfmt -w $ANDROIDBP
