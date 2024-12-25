@@ -8,7 +8,7 @@ git cherry-pick 0fc0a6c620e031c46882fdd0363c1cda9d0f0b7b
 ```
 
 ```bash
-croot && git clone https://github.com/TheParasiteProject/vendor_parasite_signatures vendor/parasite/signatures
+git clone https://github.com/TheParasiteProject/vendor_parasite_signatures vendor/parasite/signatures
 ```
 
 ```bash
@@ -54,4 +54,5 @@ BOARD_AVB_VENDOR_BOOT_ALGORITHM := $(TARGET_AVB_ALGORITHM)
 ## Credits
 
 * [android_vendor_lineage-priv_keys](https://github.com/ItsVixano/android_vendor_lineage-priv_keys) - by [ItsVixano](https://github.com/ItsVixano)
-* [vendor_evolution-priv_keys-template](https://github.com/Evolution-XYZ/vendor_evolution-priv_keys-template) - by [Evolution-XYZ](https://github.com/Evolution-XYZ)
+* [lineage-priv-template](https://github.com/LineageOS/scripts/tree/main/lineage-priv-template) - by [LineageOS](https://github.com/LineageOS)
+* [vendor_evolution-priv_keys-template](https://github.com/Evolution-X/vendor_evolution-priv_keys-template) - by [Evolution-X](https://github.com/Evolution-X)
