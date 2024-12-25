@@ -54,6 +54,16 @@ com.android.wifi.resources.certificate.override
 com.google.pixel.camera.hal.certificate.override
 com.google.pixel.vibrator.hal.certificate.override
 com.qorvo.uwb.certificate.override
+AdServicesApk:com.android.adservices.api.certificate.override
+FederatedCompute:com.android.federatedcompute.certificate.override
+HealthConnectBackupRestore:com.android.health.connect.backuprestore.certificate.override
+HealthConnectController:com.android.healthconnect.controller.certificate.override
+OsuLogin:com.android.hotspot2.osulogin.certificate.override
+SafetyCenterResources:com.android.safetycenter.resources.certificate.override
+ServiceConnectivityResources:com.android.connectivity.resources.certificate.override
+ServiceUwbResources:com.android.uwb.resources.certificate.override
+ServiceWifiResources:com.android.wifi.resources.certificate.override
+WifiDialog:com.android.wifi.dialog.certificate.override
 cts_uicc_2021
 cyngn-app
 media

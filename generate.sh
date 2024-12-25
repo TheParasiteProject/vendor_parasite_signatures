@@ -94,7 +94,16 @@ function user_input() {
 }
 
 function generate_keys() {
-	for file in $(cat $1); do
+	local filesRaw=$(cat $1)
+	local files=()
+	for file in ${filesRaw[@]}; do
+		if [[ $file == *:* ]]; then
+			file=$(echo $file | cut -d ":" -f 2)
+		fi
+		files+=($file)
+	done
+	files=($(printf "%q\n" "${files[@]}" | sort -u))
+	for file in ${files[@]}; do
 		if [[ (-f "$2/${file}.x509.pem" && -f "$2/${file}.pk8" && -f "$2/${file}-private.pem") ||
 			(-f "$2/${file}.certificate.override.x509.pem" && -f "$2/${file}.certificate.override.pk8" && -f "$2/${file}.certificate.override-private.pem") ]]; then
 			echo "$file already exists. Skipping..."
