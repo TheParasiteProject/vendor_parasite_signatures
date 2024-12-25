@@ -124,6 +124,59 @@ function generate_keys() {
 	fi
 }
 
+function generate_keystore() {
+	# generate the keystore and show the result
+	local storepassword="android"
+	local outdir="$1"
+	local outkeystore="$outdir/aosp.keystore"
+
+	if [ $# -gt 0 ]; then
+		outdir="$1"
+	fi
+	if [ $# -gt 1 ]; then
+		storepassword="$2"
+	fi
+	if [ -f "$outkeystore" ]; then
+		echo "Keystore already exists: $outkeystore !"
+		return 1
+	fi
+
+	local keynames=("media" "releasekey" "shared" "platform")
+
+	for keyname in ${keynames[@]}; do
+		if [ ! -e "$outdir/$keyname.pk8" ] || [ ! -e "$outdir/$keyname.x509.pem" ]; then
+			echo "$keyname key does not exists!"
+			return 1
+		fi
+	done
+	for keyname in ${keynames[@]}; do
+		echo "Importing $keyname to $outkeystore"
+		openssl pkcs8 \
+			-inform DER \
+			-nocrypt \
+			-in "$outdir/$keyname.pk8" \
+			-out "$outdir/$keyname.pem"
+		openssl pkcs12 \
+			-export \
+			-in "$outdir/$keyname.x509.pem" \
+			-inkey "$outdir/$keyname.pem" \
+			-out "$outdir/$keyname.p12" \
+			-password pass:android \
+			-name "$keyname"
+		keytool \
+			-noprompt -importkeystore \
+			-deststorepass "$storepassword" \
+			-destkeystore "$outkeystore" \
+			-srckeystore "$outdir/$keyname.p12" \
+			-srcstoretype PKCS12 \
+			-srcstorepass android
+		rm $outdir/$keyname.p12 $outdir/$keyname.pem
+	done
+	keytool -list -v -keystore "$outkeystore" -storepass "$storepassword"
+	echo "Done importing keys!"
+	return 0
+}
+
 if [[ $SKIP_PROMPT = true ]]; then
 	subject="$1"
 	if ! [[ $2 =~ ^[0-9]+$ ]]; then
@@ -136,3 +189,4 @@ else
 fi
 
 generate_keys $CERTIFICATE_FILES_TXT $OUTDIR
+generate_keystore $OUTDIR
