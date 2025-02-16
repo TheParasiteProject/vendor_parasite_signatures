@@ -56,3 +56,9 @@ BOARD_AVB_VENDOR_BOOT_ALGORITHM := $(TARGET_AVB_ALGORITHM)
 * [android_vendor_lineage-priv_keys](https://github.com/ItsVixano/android_vendor_lineage-priv_keys) - by [ItsVixano](https://github.com/ItsVixano)
 * [lineage-priv-template](https://github.com/LineageOS/scripts/tree/main/lineage-priv-template) - by [LineageOS](https://github.com/LineageOS)
 * [vendor_evolution-priv_keys-template](https://github.com/Evolution-X/vendor_evolution-priv_keys-template) - by [Evolution-X](https://github.com/Evolution-X)
+
+## License
+
+All code in this repository is licensed under the Apache 2.0 License.
+
+Copyright (C) 2023-2025 TheParasiteProject
