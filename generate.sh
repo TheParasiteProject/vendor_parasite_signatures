@@ -116,6 +116,11 @@ function generate_keys() {
 		fi
 	done
 
+	if [[ ! -f "$2/lineageos_pubkey" ]]; then
+		# Generate lineageos_pubkey for verifying
+		openssl rsa -in "$2/releasekey-private.pem" -RSAPublicKey_out -out "$2/lineageos_pubkey"
+	fi
+
 	if [[ ! -f "$2/avb_pkmd.bin" ]]; then
 		# Generate avb_pkmd.bin
 		$AVBTOOL extract_public_key \

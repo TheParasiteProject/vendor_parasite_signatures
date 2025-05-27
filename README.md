@@ -45,6 +45,16 @@ BOARD_AVB_VENDOR_BOOT_KEY_PATH := $(TARGET_AVB_KEY_PATH)
 BOARD_AVB_VENDOR_BOOT_ALGORITHM := $(TARGET_AVB_ALGORITHM)
 ```
 
+## Veryfing OTA
+
+```bash
+git clone https://github.com/LineageOS/update_verifier
+cd update_verifier
+pip3 install -r requirements.txt
+python3 update_verifier.py /path/to/lineageos_pubkey /path/to/zip
+
+```
+
 ## References
 
 * [Sign builds for release](https://source.android.com/docs/core/ota/sign_builds) - from source.android.com
