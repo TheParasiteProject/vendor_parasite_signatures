@@ -36,6 +36,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.bt.certificate.override",
+    certificate: "data/com.android.bt.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.btservices.certificate.override",
     certificate: "data/com.android.btservices.certificate.override",
 }
@@ -63,6 +68,11 @@ android_app_certificate {
 android_app_certificate {
     name: "com.android.conscrypt.certificate.override",
     certificate: "data/com.android.conscrypt.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.crashrecovery.certificate.override",
+    certificate: "data/com.android.crashrecovery.certificate.override",
 }
 
 android_app_certificate {
@@ -111,13 +121,53 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.hardware.contexthub.certificate.override",
+    certificate: "data/com.android.hardware.contexthub.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.dumpstate.certificate.override",
+    certificate: "data/com.android.hardware.dumpstate.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.gatekeeper.nonsecure.certificate.override",
+    certificate: "data/com.android.hardware.gatekeeper.nonsecure.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.hardware.neuralnetworks.certificate.override",
     certificate: "data/com.android.hardware.neuralnetworks.certificate.override",
 }
 
 android_app_certificate {
+    name: "com.android.hardware.power.certificate.override",
+    certificate: "data/com.android.hardware.power.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.hardware.rebootescrow.certificate.override",
     certificate: "data/com.android.hardware.rebootescrow.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.thermal.certificate.override",
+    certificate: "data/com.android.hardware.thermal.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.threadnetwork.override",
+    certificate: "data/com.android.hardware.threadnetwork.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.uwb.certificate.override",
+    certificate: "data/com.android.hardware.uwb.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.vibrator.certificate.override",
+    certificate: "data/com.android.hardware.vibrator.certificate.override",
 }
 
 android_app_certificate {
@@ -263,6 +313,11 @@ android_app_certificate {
 android_app_certificate {
     name: "com.android.tzdata.certificate.override",
     certificate: "data/com.android.tzdata.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.uprobestats.certificate.override",
+    certificate: "data/com.android.uprobestats.certificate.override",
 }
 
 android_app_certificate {
