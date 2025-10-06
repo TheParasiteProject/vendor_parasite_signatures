@@ -133,3 +133,11 @@ create_symlinks "$PRIVATE_KEY_DIR/lineageos_pubkey" $OUTDIR
 create_symlinks "$PRIVATE_KEY_DIR/avb_pkmd.bin" $OUTDIR
 create_symlinks "$PRIVATE_KEY_DIR/aosp.keystore" $OUTDIR
 [ -x "$(command -v bpfmt)" ] && bpfmt -w $ANDROIDBP
+
+unset PRIVATE_KEY_DIR
+unset OUT_DIR_ROOT
+unset OUTDIR
+unset OUT
+unset ANDROIDBP
+unset PRODUCTMK
+unset CERTIFICATE_FILES_TXT
