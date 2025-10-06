@@ -1,7 +1,5 @@
 #!/bin/bash
 
-CWD=$(pwd)
-
 # Base location: $ANDROID_ROOT/vendor/parasite/signatures/common/data
 PRIVATE_KEY_DIR=../../../../private-signatures
 
@@ -105,7 +103,7 @@ function create_symlinks() {
 	local dir_to_work=$2
 	local is_cert=$3
 
-	cd "$dir_to_work"
+	pushd "$dir_to_work" > /dev/null
 
 	local target_file=$(basename $source_file)
 
@@ -116,7 +114,7 @@ function create_symlinks() {
 		ln -fs $source_file "$target_file"
 	fi
 
-	cd $CWD
+	popd > /dev/null
 }
 
 write_blueprint_header
