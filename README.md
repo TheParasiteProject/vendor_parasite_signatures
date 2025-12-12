@@ -1,5 +1,7 @@
 # vendor_parasite_signatures
 
+OTA signing resources for TheParasiteProject.
+
 ```bash
 cd build/soong
 git remote add --fetch tpr https://github.com/TheParasiteProject/build_soong.git
