@@ -46,6 +46,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.car.framework.certificate.override",
+    certificate: "data/com.android.car.framework.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.cellbroadcast.certificate.override",
     certificate: "data/com.android.cellbroadcast.certificate.override",
 }
@@ -91,6 +96,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.geotz.certificate.override",
+    certificate: "data/com.android.geotz.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.graphics.pdf.certificate.override",
     certificate: "data/com.android.graphics.pdf.certificate.override",
 }
@@ -121,8 +131,18 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.hardware.certificate.override",
+    certificate: "data/com.android.hardware.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.hardware.contexthub.certificate.override",
     certificate: "data/com.android.hardware.contexthub.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.hardware.core_permissions.certificate.override",
+    certificate: "data/com.android.hardware.core_permissions.certificate.override",
 }
 
 android_app_certificate {
@@ -221,6 +241,11 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.modules.updatablesharedlibs.certificate.override",
+    certificate: "data/com.android.modules.updatablesharedlibs.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.nearby.halfsheet.certificate.override",
     certificate: "data/com.android.nearby.halfsheet.certificate.override",
 }
@@ -296,8 +321,18 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.telecom.certificate.override",
+    certificate: "data/com.android.telecom.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.telephony.certificate.override",
     certificate: "data/com.android.telephony.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.telephonycore.certificate.override",
+    certificate: "data/com.android.telephonycore.certificate.override",
 }
 
 android_app_certificate {
@@ -308,6 +343,11 @@ android_app_certificate {
 android_app_certificate {
     name: "com.android.tethering.certificate.override",
     certificate: "data/com.android.tethering.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.threadnetwork.certificate.override",
+    certificate: "data/com.android.threadnetwork.certificate.override",
 }
 
 android_app_certificate {
@@ -331,8 +371,18 @@ android_app_certificate {
 }
 
 android_app_certificate {
+    name: "com.android.vibrator.drv2624.certificate.override",
+    certificate: "data/com.android.vibrator.drv2624.certificate.override",
+}
+
+android_app_certificate {
     name: "com.android.virt.certificate.override",
     certificate: "data/com.android.virt.certificate.override",
+}
+
+android_app_certificate {
+    name: "com.android.vndk.certificate.override",
+    certificate: "data/com.android.vndk.certificate.override",
 }
 
 android_app_certificate {
